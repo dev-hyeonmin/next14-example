@@ -1,5 +1,3 @@
-'use client';
-
 // client side data fetching
 // export default function Movie() {
 //     const [isLoading, setIsLoading] = useState(true);
@@ -7,7 +5,10 @@
 //     const getMovies = async () => {
 //         const response = await fetch("https://nomad-movies.nomadcoders.workers.dev/movies")
 //         const json = await response.json();
-        
+
+import Link from "next/link";
+
+
 //         setMovies(json);
 //         setIsLoading(false);
 //     };
@@ -20,15 +21,23 @@
 // }
 
 // server side data fetching
-const URL = 'https://nomad-movies.nomadcoders.workers.dev/movies';
+const API_URL = "https://nomad-movies.nomadcoders.workers.dev/movies";
 
-async function getMovies () {
-    const reponse = await fetch(URL);
-    const json = await reponse.json();
+async function getMovies() {
+    const response = await fetch(API_URL);
+    const json = await response.json();
     return json;
 }
 
 export default async function Movie() {
     const movies = await getMovies();
-    return <div>{JSON.stringify(movies)}</div>;
+    return (
+        <div>
+            {movies.map((movie) => (
+                <li key={movie.id}>
+                    <Link href={`/movies/${movie.id}`}>{movie.title}</Link>
+                </li>
+            ))}
+        </div>
+    );
 }
