@@ -6,7 +6,7 @@
 //         const response = await fetch("https://nomad-movies.nomadcoders.workers.dev/movies")
 //         const json = await response.json();
 
-import Link from "next/link";
+import Movie from "../../../components/movie";
 
 
 //         setMovies(json);
@@ -29,14 +29,18 @@ async function getMovies() {
     return json;
 }
 
-export default async function Movie() {
+export default async function Movies() {
     const movies = await getMovies();
+    
     return (
         <div>
             {movies.map((movie) => (
-                <li key={movie.id}>
-                    <Link href={`/movies/${movie.id}`}>{movie.title}</Link>
-                </li>
+                <Movie
+                    key={movie.id}
+                    id={movie.id}
+                    poster_path={movie.poster_path}
+                    title={movie.title}
+                />
             ))}
         </div>
     );

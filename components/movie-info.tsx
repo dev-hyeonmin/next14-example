@@ -1,6 +1,6 @@
 const API_URL = "https://nomad-movies.nomadcoders.workers.dev/movies";
 
-async function getMovie (id: string) {
+export async function getMovie (id: string) {
     const response = await fetch(`${API_URL}/${id}`);
     return response.json();
 }

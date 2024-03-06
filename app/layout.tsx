@@ -1,4 +1,5 @@
 import Navigation from "../components/navigation"
+import '../style/global.css'
 
 export const metadata = {
   title: {

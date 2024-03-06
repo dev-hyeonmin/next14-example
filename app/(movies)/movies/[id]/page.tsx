@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { Suspense } from "react";
-import MovieInfo from "../../../../components/movie-info";
+import MovieInfo, { getMovie } from "../../../../components/movie-info";
 import MovieVideos from "../../../../components/movie-video";
 import Loading from "./loading";
 
@@ -40,7 +40,8 @@ export async function generateMetadata({
 }: {
     params: { id: string };
 }): Promise<Metadata> {
+    const movie = await getMovie(id);
     return {
-        title: `Movices ${id}`,
+        title: `${movie.title}`,
     }
 }
